@@ -1,9 +1,7 @@
+
 #Conjuntos:
 #Las ciudades del viajante
 set CIUDADES;
-
-#Parámetros (o constantes):
-param TARIFA;
 
 # Distancia de j a k, con j distinto de k
 param DISTANCIA{j in CIUDADES, k in CIUDADES : j<>k};
@@ -27,7 +25,10 @@ s.t. llegoJ{j in CIUDADES}: sum{i in CIUDADES: i<>j} Y[i,j] = 1;
 #Voy hacia un sólo lugar desde i
 s.t. voyI{i in CIUDADES}: sum{j in CIUDADES: i<>j} Y[i,j] = 1;
 
+
 #Secuencia para evitar subtours
 s.t. orden{i in CIUDADES, j in CIUDADES: i<>j and i<>'A' and j<>'A'}: U[i] - U[j] + card(CIUDADES)*Y[i,j] <= card(CIUDADES) - 1;
 
 solve;
+
+end;
